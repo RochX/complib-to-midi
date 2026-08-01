@@ -22,6 +22,8 @@ Should be its own folder
 Just one file should be plenty.
 - User input
 - Grabbing the rows is in theory just a `curl`.
+- There is also an API described at [complib API docs](https://complib.org/api)
+  - THIS is certainly the right option over just running a `curl`.
 
 ## Export rows to MIDI
 Handles combining the rows and configuration settings
