@@ -1,6 +1,6 @@
 import unittest
 
-import complib_api
+import complib_api, rows_to_midi
 
 class TestComplibAPI(unittest.TestCase):
   def setUp(self):
@@ -13,6 +13,17 @@ class TestComplibAPI(unittest.TestCase):
 
   def test_get_rows_short(self):
     self.assertEqual(complib_api.get_rows_short(27808, "method"),self.hunt_minimus)
+
+class TestRowsToMIDI(unittest.TestCase):
+  def setUp(self):
+    self.rounds4 = '1234'
+    self.rounds8 = '12345678'
+    self.bell_midi_map = rows_to_midi.bell_midi_map
+    return super().setUp()
+
+  def test_rows_to_pitches(self):
+    self.assertEqual(rows_to_midi.row_to_pitches(self.rounds4),[81,80,78,76])
+    self.assertEqual(rows_to_midi.row_to_pitches(self.rounds8),[81,80,78,76,74,73,71,69])
 
 if __name__ == "__main__":
   unittest.main()
