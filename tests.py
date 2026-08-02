@@ -17,13 +17,18 @@ class TestComplibAPI(unittest.TestCase):
 class TestRowsToMIDI(unittest.TestCase):
   def setUp(self):
     self.rounds4 = '1234'
+    self.rounds5 = '12345'
     self.rounds8 = '12345678'
     self.bell_midi_map = rows_to_midi.bell_midi_map
     return super().setUp()
 
   def test_rows_to_pitches(self):
-    self.assertEqual(rows_to_midi.row_to_pitches(self.rounds4),[81,80,78,76])
-    self.assertEqual(rows_to_midi.row_to_pitches(self.rounds8),[81,80,78,76,74,73,71,69])
+    self.assertEqual(rows_to_midi.row_to_pitches(self.rounds4,shift=False),[81,80,78,76])
+    self.assertEqual(rows_to_midi.row_to_pitches(self.rounds4,shift=True),[74,73,71,69])
+    self.assertEqual(rows_to_midi.row_to_pitches(self.rounds5,shift=False),[81,80,78,76,74])
+    self.assertEqual(rows_to_midi.row_to_pitches(self.rounds5,shift=True),[76,74,73,71,69])
+    self.assertEqual(rows_to_midi.row_to_pitches(self.rounds8,shift=False),[81,80,78,76,74,73,71,69])
+    self.assertEqual(rows_to_midi.row_to_pitches(self.rounds8,shift=True),[81,80,78,76,74,73,71,69])
 
 if __name__ == "__main__":
   unittest.main()

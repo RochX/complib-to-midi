@@ -11,10 +11,29 @@ bell_midi_map = {
   8: 69
 }
 
-def row_to_pitches(row):
+def row_to_pitches(row,shift=True):
+  """
+  Turns rows into pitches.
+
+  Parameters:
+    row: the input row
+    shift: if true, sets the highest number to the lowest pitch. For ringers, this is equivalent to ringing on the back $n$ bells.  
+  """
   pitches = []
+
+  biggest_bell = 0
   for b in row:
-    pitches.append(bell_midi_map[int(b)])
+    biggest_bell = max(biggest_bell,int(b))
+
+  # when using the current 8 bell midi map:
+  # list(bell_midi_map.keys()[-1]) == 8
+  offset = list(bell_midi_map.keys())[-1] - biggest_bell
+
+  for b in row:
+    if shift:
+      pitches.append(bell_midi_map[int(b)+offset])
+    else:
+      pitches.append(bell_midi_map[int(b)])
 
   return pitches
 
@@ -23,12 +42,17 @@ class RowsToMIDI():
   channel = 0
 
   def __init__(self,tempo,outfile,handstroke_pause=True):
+    self.time = 0
     self.tempo = tempo
     self.handstroke_pause = handstroke_pause
 
+    self.midi = MIDIFile(1)
+    self.midi.addTempo(self.track, self.time, self.tempo)
 
 """
 Example midiutil code.
+
+from midiutil import MIDIFile
 
 degrees  = [69, 71, 73, 74, 76, 78, 80, 81]  # MIDI note number
 track    = 0
