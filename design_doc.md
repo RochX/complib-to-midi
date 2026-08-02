@@ -14,6 +14,9 @@ Does the following:
   - Method vs Composition
 3. Exports rows to MIDI
   - Uses the configuration from step 1
+4. MIDI to audio file
+  - Uses `fluidsynth`
+  - Ex. `fluidsynth -F output.wav -ni kzooBells.sf2 major-scale.mid`.
 
 ## Configuration
 Should be its own folder
@@ -27,6 +30,9 @@ Just one file should be plenty.
 
 ## Export rows to MIDI
 Handles combining the rows and configuration settings
+
+## MIDI to Audio File
+This final optional step uses `fluidsynth` to take the MIDI and turn it into an audio file.
 
 # File Structure
 Each of the three steps starts as its own file.
