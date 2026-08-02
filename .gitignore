@@ -5,6 +5,13 @@
 # MIDI files
 *.mid
 
+# audio files
+*.wav
+*.mp3
+
+# sound font files
+*.sf2
+
 # PYTHON GITIGNORE
 # Byte-compiled / optimized / DLL files
 __pycache__/
