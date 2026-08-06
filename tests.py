@@ -14,6 +14,11 @@ class TestComplibAPI(unittest.TestCase):
   def test_get_rows_short(self):
     self.assertEqual(complib_api.get_rows_short(27808, "method"),self.hunt_minimus)
 
+  def test_get_stage(self):
+    self.assertEqual(complib_api.get_stage(27808, "method"),4)
+    self.assertEqual(complib_api.get_stage(12399, "method"),7)
+    self.assertEqual(complib_api.get_stage(162390, "composition"),8)
+
 class TestRowsToMIDI(unittest.TestCase):
   def setUp(self):
     self.rounds4 = '1234'

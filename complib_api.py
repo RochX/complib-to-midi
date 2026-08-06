@@ -32,3 +32,10 @@ def get_rows_short(complib_id, type):
   """
   r = api_request(complib_id, type)
   return [x[0] for x in r.json()['rows']]
+
+def get_stage(complib_id, type):
+  """
+  Gets the stage (number of bells) this method/composition requires.
+  """
+  r = api_request(complib_id, type)
+  return r.json()['stage']
