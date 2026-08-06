@@ -4,8 +4,11 @@ If you don't know what change ringing is, two videos I recommend are by [Tom Sco
 
 ## What This Code Does
 This code uses the `MIDIUtil` to write MIDI files from change ringing compositions.
-It pulls the rows from compositions on [complib.org](complib.org) and converts them into MIDI.
+It pulls the rows from compositions on [complib.org](complib.org) and converts them into a MIDI file and audio file.
 Essentially one row equates to one "measure", and the numbers $1,2,3,...,n$ map to the notes of a musical scale.
 
 ## An example set of rows
 See [Composition 162390](https://complib.org/composition/162390/) and its [rows](https://complib.org/composition/162390/rows) for an example.
+
+## Design Choices
+A more lengthy write up for the project can be found in the `design_doc.md` file.
