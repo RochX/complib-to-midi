@@ -28,6 +28,23 @@ Just one file should be plenty.
 - There is also an API described at [complib API docs](https://complib.org/api)
   - THIS is certainly the right option over just running a `curl`.
 
+### Implementation Notes (Cover Bells)
+For odd numbered bell methods/compositions, traditionally an extra bell is rung in the last position, called a "cover" bell.
+Example: If ringing a method on 7 bells, an 8th bell is added onto the end of every row.
+When ringing, this gives a more steady rhythm for the ringers.
+
+For the implementation, there needs to be an option to add a cover bell.
+In theory I should also be able to add any number of cover bells *and* in an order that may differs from rounds.
+Initial thoughts:
+- Configuration variables:
+  - `num_covers`: tells how many covers are to be added.
+  - `cover_mask`: this string variable implements the order of the covers, it would look something like `abc` where `a` is highest pitch cover bell and `c` is lowest pitch cover bell. Covers will be always be the lower pitches added. 
+    - (NOTE: An even more non-traditional way to ring would be to have the covers not be the lowest notes. Example: Ring Plain Bob Minimus with starting rounds being 123546, so 4 and 6 are cover bells).
+    - For now I will *not* be implementing the `cover_mask`. **This will get implemented once the primary function of this project works. This is to avoid feature bloat and to avoid the project getting stuck in development hell.**
+
+We will modify the stage and rows grabbed from complib API based upon how many covers are required.
+Initial development might not include cover bells feature in order to keep code simple.
+
 ## Export rows to MIDI
 Handles combining the rows and configuration settings.
 
