@@ -52,11 +52,17 @@ In the implementation, there are two choices that could be made here:
     - Additional downside is that at the same tempo/CPM, the version with a handstroke pause will sound "faster" due to one extra silent note being squeezed into the same amount of time.
     - Upside is that CPM will be exactly correct, at a given CPM there will be exactly that many changes per minute, with or without a handstroke pause.
 
+#### Implementation
+For the sake of producing files where the length accurately lines up with the CPM, option 2 will be implemented.
+
+The number for which the time is incremented by will be $o = \frac{1}{2n+1}$ where $n$ is the number of bells being rung.
+Thus in the main loop for note writing, we will be having `time += o`.
+
 ## MIDI to Audio File
 This final optional step uses `fluidsynth` to take the MIDI and turn it into an audio file.
 
 # File Structure
-Each of the three steps starts as its own file.
+Each of these steps starts as its own Python file.
 As each file bloats, create folders for them.
 
-The steps are independent beyond the last one taking in the previous two steps as input.
+The steps are independent from each other beyond their sequential nature.
