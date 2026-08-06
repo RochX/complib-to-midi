@@ -72,8 +72,25 @@ In the implementation, there are two choices that could be made here:
 #### Implementation
 For the sake of producing files where the length accurately lines up with the CPM, option 2 will be implemented.
 
-The number for which the time is incremented by will be $o = \frac{1}{2n+1}$ where $n$ is the number of bells being rung.
-Thus in the main loop for note writing, we will be having `time += o`.
+If `tempo = 30` then there are 30 changes per minute.
+In MIDI, there are 30 logical beats per minute.
+Thus each beat should contain one row.
+
+If there are $n$ bells with *no* handstroke pause, then the time stamps for one row should be $0, \frac{1}{n}, \frac{2}{n}, \dots, \frac{n-1}{n}$.
+
+If there are $n$ bells with *yes* handstroke pause, then the time stamps for two rows (over two beats) should be:
+- $0, \frac{2}{2n+1}, \frac{4}{2n+1} \dots, \frac{2(n-1)}{2n+1}$ (odd numbered row)
+- $\frac{2n}{2n+1}, \frac{2(n+1)}{2n+1}, \dots, \frac{2(2n-1)}{2n+1}$ (even numbered row)
+- $\frac{4n}{2n+1}$ (handstroke pause)
+
+Example: $n = 4$.
+If we are ringing rounds then we have $12341234h$, with $h$ being the handstroke pause, so 9 notes in total.
+This should take up 2 beats of MIDI time.
+Thus the note time stamps are: $0,\frac{2}{9},\frac{4}{9},\frac{6}{9},\frac{8}{9},\frac{10}{9},\frac{12}{9},\frac{14}{9},\frac{16}{9}$.
+
+Therefore, we can see that the time increment we need is either:
+- `t_increment` equals $\frac{1}{n}$ if no handstroke.
+- `t_increment` equals $\frac{2}{2n+1}$ if yes handstroke.
 
 ## MIDI to Audio File
 This final optional step uses `fluidsynth` to take the MIDI and turn it into an audio file.
