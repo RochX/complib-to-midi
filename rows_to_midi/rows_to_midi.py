@@ -72,7 +72,7 @@ class RowsToMIDI():
 
     # determines whether api_input_rows is full JSON or just the short version.
     short = True
-    if len(api_input_rows[0]) > 1:
+    if isinstance(api_input_rows[0], list) or isinstance(api_input_rows[0], tuple):
       short = False
 
     # puts the results from api into two separate lists
