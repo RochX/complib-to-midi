@@ -1,6 +1,7 @@
 import unittest
 
-import complib_api, rows_to_midi
+from complib_api import complib_api
+from rows_to_midi import rows_to_midi
 
 class TestComplibAPI(unittest.TestCase):
   def setUp(self):
@@ -25,6 +26,7 @@ class TestRowsToMIDI(unittest.TestCase):
     self.rounds5 = '12345'
     self.rounds8 = '12345678'
     self.bell_midi_map = rows_to_midi.bell_midi_map
+    self.tempo = 30
     return super().setUp()
 
   def test_rows_to_pitches(self):
